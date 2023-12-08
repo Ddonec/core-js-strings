@@ -60,8 +60,8 @@ function isString(value) {
  *   concatenateStrings('', 'bb') => 'bb'
  */
 function concatenateStrings(value1, value2) {
-  const str = value1 + value2;
-  return str;
+  // const str = value1 + value2;
+  return value1.concat(value2);
 }
 
 /**
@@ -81,7 +81,8 @@ function getFirstChar(value) {
   //   char = '';
   // } else char = value[0];
   // return char;
-  return value === '' ? '' : value[0];
+  // return value === '' ? '' : value[0];
+  return value === '' ? '' : value.charAt(0);
 }
 
 /**
@@ -164,7 +165,13 @@ function repeatString(str, times) {
  *   removeFirstOccurrences('ABABAB', 'BA') => 'ABAB'.
  */
 function removeFirstOccurrences(str, value) {
-  return str.replace(value, '');
+  // return str.replace(value, '');
+  const newStr = str;
+  const match = newStr.indexOf(value);
+  if (match !== -1) {
+    return newStr.slice(0, match) + newStr.slice(match + value.length);
+  }
+  return newStr;
 }
 
 /**
@@ -179,8 +186,13 @@ function removeFirstOccurrences(str, value) {
  *   removeLastOccurrences('I like legends', 'end') => 'I like legs'.
  *   removeLastOccurrences('ABABAB', 'BA') => 'ABAB'.
  */
-function removeLastOccurrences(/* str, value */) {
-  throw new Error('Not implemented');
+function removeLastOccurrences(str, value) {
+  const newStr = str;
+  const match = newStr.lastIndexOf(value);
+  if (match !== -1) {
+    return newStr.slice(0, match) + newStr.slice(match + value.length);
+  }
+  return newStr;
 }
 
 /**
@@ -195,8 +207,14 @@ function removeLastOccurrences(/* str, value */) {
  *   sumOfCodes('') => 0
  *   sumOfCodes() => 0
  */
-function sumOfCodes(/* str */) {
-  throw new Error('Not implemented');
+function sumOfCodes(str) {
+  let newStr = str;
+  let sumStr = 0;
+  for (let i = 0; i < str.length; i += 1) {
+    sumStr += newStr.charCodeAt(0);
+    newStr = newStr.substring(1);
+  }
+  return sumStr.toString();
 }
 
 /**
@@ -210,8 +228,8 @@ function sumOfCodes(/* str */) {
  *   startsWith('Hello World', 'World') => false
  *   startsWith('Hello World', 'Hello') => true
  */
-function startsWith(/* str, substr */) {
-  throw new Error('Not implemented');
+function startsWith(str, substr) {
+  return str.startsWith(substr);
 }
 
 /**
@@ -225,8 +243,8 @@ function startsWith(/* str, substr */) {
  *   endsWith('Hello World', 'World') => true
  *   endsWith('Hello World', 'Hello') => false
  */
-function endsWith(/* str, substr */) {
-  throw new Error('Not implemented');
+function endsWith(str, substr) {
+  return str.endsWith(substr);
 }
 
 /**
@@ -242,8 +260,18 @@ function endsWith(/* str, substr */) {
  *   formatTime(0, 45) => "00:45"
  *   formatTime(0, 0) => "00:00"
  */
-function formatTime(/* minutes, seconds */) {
-  throw new Error('Not implemented');
+function formatTime(minutes, seconds) {
+  let minStr = minutes.toString();
+  let secSrt = seconds.toString();
+  // const zero = '0';
+  if (minutes < 10) {
+    minStr = minStr.padStart(2, '0');
+  }
+  if (seconds < 10) {
+    secSrt = secSrt.padStart(2, '0');
+  }
+  const finalStr = minStr.concat(':', secSrt);
+  return finalStr;
 }
 
 /**
@@ -256,8 +284,8 @@ function formatTime(/* minutes, seconds */) {
  *   reverseString('abcdef') => 'fedcba'
  *   reverseString('12345') => '54321'
  */
-function reverseString(/* str */) {
-  throw new Error('Not implemented');
+function reverseString(str) {
+  return str.split('').reverse().join('');
 }
 
 /**
@@ -271,8 +299,11 @@ function reverseString(/* str */) {
  *   orderAlphabetically('textbook') => 'bekoottx'
  *   orderAlphabetically('abc123xyz') => '123abcxyz'
  */
-function orderAlphabetically(/* str */) {
-  throw new Error('Not implemented');
+function orderAlphabetically(str) {
+  // const abStr = ''.join(sorted(str));
+  const arr = str.split('');
+  const abStr = arr.sort().join('');
+  return abStr;
 }
 
 /**
@@ -287,8 +318,8 @@ function orderAlphabetically(/* str */) {
  *   containsSubstring('JavaScript is Fun', 'Python') => false
  *   containsSubstring('12345', '34') => true
  */
-function containsSubstring(/* str, substring */) {
-  throw new Error('Not implemented');
+function containsSubstring(str, substring) {
+  return str.includes(substring);
 }
 
 /**
@@ -305,8 +336,15 @@ function containsSubstring(/* str, substring */) {
  *   countVowels('aEiOu') => 5
  *   countVowels('XYZ') => 1
  */
-function countVowels(/* str */) {
-  throw new Error('Not implemented');
+function countVowels(str) {
+  const vowels = 'aeiouyAEIOUY';
+  const count = Array.from(str).filter((char) => vowels.includes(char));
+  // for (const char of str) {
+  //   if (vowels.includes(char)) {
+  //     count += 1;
+  //   }
+  // }
+  return count.length;
 }
 
 /**
@@ -322,8 +360,25 @@ function countVowels(/* str */) {
  *   isPalindrome('apple') => false
  *   isPalindrome('No lemon, no melon') => true
  */
-function isPalindrome(/* str */) {
-  throw new Error('Not implemented');
+function isPalindrome(str) {
+  // const middleCount = Math.ceil(str.length / 2);
+  // let srtLeft = str.split(0, middleCount);
+  // let strRight = str.split(middleCount + 1, str.length);
+  // strRight = strRight.replace(/[^a-zA-Z0-9]/g, '').toLowerCase();
+  // let strRightReverce = strRight.split('').reverse().join('');
+  // srtLeft = srtLeft.replace(/[^a-zA-Z0-9]/g, '').toLowerCase();
+  // strRightReverce = strRightReverce.trim();
+  // return srtLeft === strRightReverce;
+  // const middleCount = Math.ceil(str.length / 2);
+  // let srtLeft = str.slice(0, middleCount);
+  // let strRight = str.slice(-middleCount);
+  // srtLeft = srtLeft.replace(/[^a-zA-Z0-9]/g, '').toLowerCase();
+  // strRight = strRight.replace(/[^a-zA-Z0-9]/g, '').toLowerCase();
+  // const strRightReversed = strRight.split('').reverse().join('');
+  // return srtLeft === strRightReversed;
+  const updateStr = str.replace(/[^a-zA-Z0-9]/g, '').toLowerCase();
+  const reverceStr = updateStr.split('').reverse().join('');
+  return updateStr === reverceStr;
 }
 
 /**
