@@ -523,11 +523,12 @@ function extractEmails(str) {
  *
  */
 function encodeToRot13(str) {
-  return str.replace(/[a-zA-Z]/g, function (char) {
+  return str.replace(/[a-zA-Z]/g, function func(char) {
     const charCode = char.charCodeAt(0);
     const baseCharCode = char <= 'Z' ? 'A'.charCodeAt(0) : 'a'.charCodeAt(0);
     const rotatedCharCode =
       ((charCode - baseCharCode + 13) % 26) + baseCharCode;
+
     return String.fromCharCode(rotatedCharCode);
   });
 }
