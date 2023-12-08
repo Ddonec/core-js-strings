@@ -208,13 +208,19 @@ function removeLastOccurrences(str, value) {
  *   sumOfCodes() => 0
  */
 function sumOfCodes(str) {
-  let newStr = str;
+  // let newStr = str;
+  // let sumStr = 0;
+  // for (let i = 0; i < String(str).length; i += 1) {
+  //   sumStr += newStr.charCodeAt(0);
+  //   newStr = newStr.substring(1);
+  // }
+  // return sumStr.toString();
+  const newStr = str || '';
   let sumStr = 0;
-  for (let i = 0; i < str.length; i += 1) {
-    sumStr += newStr.charCodeAt(0);
-    newStr = newStr.substring(1);
+  for (let i = 0; i < newStr.length; i += 1) {
+    sumStr += newStr.charCodeAt(i);
   }
-  return sumStr.toString();
+  return sumStr;
 }
 
 /**
